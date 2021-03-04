@@ -112,6 +112,7 @@ if __name__ == '__main__':
     delete_marker_list = []
     version_list = []
 
+    print("$ paginating and adding versions to array")
     for object_response_itr in object_response_paginator.paginate(Bucket=bucket):
         if 'DeleteMarkers' in object_response_itr:
             for delete_marker in object_response_itr['DeleteMarkers']:
@@ -121,7 +122,8 @@ if __name__ == '__main__':
             for version in object_response_itr['Versions']:
                 if version['IsLatest'] is False:
                     version_list.append({'Key': version['Key'], 'VersionId': version['VersionId']})
-
+    print("$ pagination complete")
+    print("$ starting deletes now...")
     for i in range(0, len(delete_marker_list), 1000):
         response = s3_client.delete_objects(
             Bucket=bucket,
@@ -130,7 +132,7 @@ if __name__ == '__main__':
                 'Quiet': True
             }
         )
-        # print(response)
+        print(response)
 
     for i in range(0, len(version_list), 1000):
         response = s3_client.delete_objects(
@@ -140,4 +142,6 @@ if __name__ == '__main__':
                 'Quiet': True
             }
         )
-        # print(response)
+        print(response)
+
+    print("$ process completed successfully")
