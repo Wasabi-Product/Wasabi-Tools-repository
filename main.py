@@ -1,5 +1,4 @@
 import sys
-from progressbar import progressbar
 from boto3 import client, Session
 from botocore.exceptions import ProfileNotFound, ClientError
 
@@ -123,7 +122,7 @@ if __name__ == '__main__':
                 if version['IsLatest'] is False:
                     version_list.append({'Key': version['Key'], 'VersionId': version['VersionId']})
 
-    for i in progressbar(range(0, len(delete_marker_list), 1000)):
+    for i in range(0, len(delete_marker_list), 1000):
         response = s3_client.delete_objects(
             Bucket=bucket,
             Delete={
@@ -133,7 +132,7 @@ if __name__ == '__main__':
         )
         # print(response)
 
-    for i in progressbar(range(0, len(version_list), 1000)):
+    for i in range(0, len(version_list), 1000):
         response = s3_client.delete_objects(
             Bucket=bucket,
             Delete={
