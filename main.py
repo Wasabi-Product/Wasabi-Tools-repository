@@ -79,12 +79,12 @@ def region_selection():
 def create_connection_and_test(aws_access_key_id: str, aws_secret_access_key: str, _region, _bucket):
     try:
         _s3_client = client('s3',
-                            endpoint_url='https://s3.' + _region + '.wasabisys.com',
+                            endpoint_url='https://s3.wasabibeta.com',
                             aws_access_key_id=aws_access_key_id,
                             aws_secret_access_key=aws_secret_access_key)
 
         # Test credentials are working
-        list_buckets = _s3_client.list_buckets()
+        _s3_client.list_buckets()
 
         try:
             _s3_client.head_bucket(Bucket=bucket)
@@ -105,7 +105,8 @@ def create_connection_and_test(aws_access_key_id: str, aws_secret_access_key: st
 if __name__ == '__main__':
     access_key_id, secret_access_key = get_credentials()
     bucket = input("$ Please enter the name of the bucket: ").strip()
-    region = region_selection()
+    # region = region_selection()
+    region = ""
     s3_client = create_connection_and_test(access_key_id, secret_access_key, region, bucket)
 
     object_response_paginator = s3_client.get_paginator('list_object_versions')
