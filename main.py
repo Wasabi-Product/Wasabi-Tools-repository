@@ -104,7 +104,7 @@ def create_connection_and_test(aws_access_key_id: str, aws_secret_access_key: st
 
 if __name__ == '__main__':
     access_key_id, secret_access_key = get_credentials()
-    bucket = input("$ Please enter the name of the bucket: ").strip().lower()
+    bucket = input("$ Please enter the name of the bucket: ").strip()
     region = region_selection()
     s3_client = create_connection_and_test(access_key_id, secret_access_key, region, bucket)
 
