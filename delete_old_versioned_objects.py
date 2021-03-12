@@ -130,7 +130,7 @@ if __name__ == '__main__':
     print("$ Total Versioned objects (will be deleted): " + str(len(version_list)))
     print("$ pagination complete")
     print("$ starting deletes now...")
-    print("$ removing delete markers")
+    print("$ removing delete markers 1000 at a time")
     for i in range(0, len(delete_marker_list), 1000):
         response = s3_client.delete_objects(
             Bucket=bucket,
@@ -140,7 +140,7 @@ if __name__ == '__main__':
             }
         )
         print(response)
-    print("$ removing old versioned objects")
+    print("$ removing old versioned objects 100 at a time")
     for i in range(0, len(version_list), 1000):
         response = s3_client.delete_objects(
             Bucket=bucket,
