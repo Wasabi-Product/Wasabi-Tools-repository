@@ -110,8 +110,9 @@ if __name__ == '__main__':
     object_response_paginator = s3_client.get_paginator('list_object_versions')
     delete_marker_list = []
     version_list = []
+    current_objects = 0
 
-    print("$ paginating and adding versions to array")
+    print("$ paginating and adding versions to array this may take a while... please wait")
     for object_response_itr in object_response_paginator.paginate(Bucket=bucket):
         if 'DeleteMarkers' in object_response_itr:
             for delete_marker in object_response_itr['DeleteMarkers']:
@@ -121,6 +122,12 @@ if __name__ == '__main__':
             for version in object_response_itr['Versions']:
                 if version['IsLatest'] is False:
                     version_list.append({'Key': version['Key'], 'VersionId': version['VersionId']})
+                elif version['IsLatest'] is True:
+                    current_objects += 1
+
+    print("$ Total Delete marker: " + str(len(delete_marker_list)))
+    print("$ Total Current objects: " + str(current_objects))
+    print("$ Total Versioned objects (will be deleted): " + str(len(version_list)))
     print("$ pagination complete")
     print("$ starting deletes now...")
     print("$ removing delete markers")

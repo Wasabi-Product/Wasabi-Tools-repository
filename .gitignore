@@ -3,4 +3,7 @@ million_object_upload.py
 data
 reference.sh
 test.py
+connectjs.js
 .idea
+package-lock.json
+package.json
