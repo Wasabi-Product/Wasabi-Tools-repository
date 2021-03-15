@@ -130,7 +130,6 @@ if __name__ == '__main__':
         if 'DeleteMarkers' in object_response_itr:
             for delete_marker in object_response_itr['DeleteMarkers']:
                 delete_marker_count += 1
-                delete_marker_size += delete_marker['Size']
 
         if 'Versions' in object_response_itr:
             for version in object_response_itr['Versions']:
@@ -141,7 +140,7 @@ if __name__ == '__main__':
                     current_object_count += 1
                     current_object_size += version['Size']
 
-    print("$ Total Delete marker: " + str(delete_marker_count))
+    print("$ Total Delete markers: " + str(delete_marker_count))
     print("$ Number of Current objects: " + str(current_object_count))
     print("$ Current Objects size: ", calculate_size(current_object_size, size_table))
     print("$ Number of Versioned objects: " + str(versioned_object_count))
