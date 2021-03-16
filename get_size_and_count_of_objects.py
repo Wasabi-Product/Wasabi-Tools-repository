@@ -124,11 +124,14 @@ if __name__ == '__main__':
     versioned_object_size = 0
     current_object_count = 0
     current_object_size = 0
+    delete_marker_list = []
+    version_list = []
 
     print("$ Calculating, please wait... this may take a while")
     for object_response_itr in object_response_paginator.paginate(Bucket=bucket):
         if 'DeleteMarkers' in object_response_itr:
             for delete_marker in object_response_itr['DeleteMarkers']:
+                delete_marker_list.append({'Key': delete_marker['Key'], 'VersionId': delete_marker['VersionId']})
                 delete_marker_count += 1
 
         if 'Versions' in object_response_itr:
@@ -136,6 +139,7 @@ if __name__ == '__main__':
                 if version['IsLatest'] is False:
                     versioned_object_count += 1
                     versioned_object_size += version['Size']
+                    version_list.append({'Key': version['Key'], 'VersionId': version['VersionId']})
                 elif version['IsLatest'] is True:
                     current_object_count += 1
                     current_object_size += version['Size']
@@ -146,5 +150,38 @@ if __name__ == '__main__':
     print("$ Number of Versioned objects: " + str(versioned_object_count))
     print("$ Versioned Objects size: ", calculate_size(versioned_object_size, size_table))
     print("$ Total size: ", calculate_size(versioned_object_size + current_object_size, size_table))
+
+    delete_flag = False
+    while not delete_flag:
+        choice = input("$ Do you wish to delete the delete markers and non-current objects? [y/n]")
+        if choice.strip().lower() == 'y':
+            delete_flag = True
+            print("$ starting deletes now...")
+            print("$ removing delete markers 1000 at a time")
+            for i in range(0, len(delete_marker_list), 1000):
+                response = s3_client.delete_objects(
+                    Bucket=bucket,
+                    Delete={
+                        'Objects': delete_marker_list[i:i + 1000],
+                        'Quiet': True
+                    }
+                )
+                print(response)
+            print("$ removing old versioned objects 1000 at a time")
+            for i in range(0, len(version_list), 1000):
+                response = s3_client.delete_objects(
+                    Bucket=bucket,
+                    Delete={
+                        'Objects': version_list[i:i + 1000],
+                        'Quiet': True
+                    }
+                )
+                print(response)
+
+        elif choice == 'n':
+            delete_flag = True
+
+        else:
+            print("$ invalid choice please try again.")
 
     print("$ process completed successfully")

@@ -125,9 +125,9 @@ if __name__ == '__main__':
                 elif version['IsLatest'] is True:
                     current_objects += 1
 
-    print("$ Total Delete marker: " + str(len(delete_marker_list)))
+    print("$ Total Delete marker (will be deleted): " + str(len(delete_marker_list)))
     print("$ Total Current objects: " + str(current_objects))
-    print("$ Total Versioned objects (will be deleted): " + str(len(version_list)))
+    print("$ Total Non Current objects (will be deleted): " + str(len(version_list)))
     print("$ pagination complete")
     print("$ starting deletes now...")
     print("$ removing delete markers 1000 at a time")
@@ -140,7 +140,7 @@ if __name__ == '__main__':
             }
         )
         print(response)
-    print("$ removing old versioned objects 100 at a time")
+    print("$ removing old versioned objects 1000 at a time")
     for i in range(0, len(version_list), 1000):
         response = s3_client.delete_objects(
             Bucket=bucket,
