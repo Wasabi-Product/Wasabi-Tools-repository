@@ -1,6 +1,16 @@
-#  Copyright (c) 2021. This script is available as fair use for users. This script can be used freely with
-#  Wasabi Technologies.inc. Distributed by the support team at wasabi.
+#  Copyright (c) 2021. This script is available as fair use for users. This script can be used freely with Wasabi
+#  Technologies, Inc. Distributed by the support team at Wasabi Technologies, Inc.
 
+"""
+Overview
+This Script will take the following inputs:
+ 1. profile name / Access key and Secret Key
+ 2. Bucket name
+ 3. region
+
+ Calculate the size and count of the total number of delete markers, current and non current objects. Will ask for a
+ prompt to delete the delete markers and non-current objects.
+"""
 import sys
 from boto3 import client, Session
 from botocore.exceptions import ProfileNotFound, ClientError
