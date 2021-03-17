@@ -1,9 +1,18 @@
+#  Copyright (c) 2021. This script is available as fair use for users. This script can be used freely with
+#  Wasabi Technologies.inc. Distributed by the support team at wasabi.
+
 import sys
 from boto3 import client, Session
 from botocore.exceptions import ProfileNotFound, ClientError
 
 
 def calculate_size(size, _size_table):
+    """
+    This function dynamically calculates the right base unit symbol for size of the object.
+    :param size: size in integer to be dynamically calculated.
+    :param _size_table: dictionary of size in Bytes
+    :return: string of converted size.
+    """
     count = 0
     while size // 1024 > 0:
         size = size / 1024
@@ -12,6 +21,13 @@ def calculate_size(size, _size_table):
 
 
 def get_credentials():
+    """
+    This function gets the access key and secret key by 2 methods.
+    1. Select profile from aws credentials file.
+       Make sure that you have run AWS config and set up your keys in the ~/.aws/credentials file.
+    2. Insert the keys directly as a string.
+    :return: access key and secret key
+    """
     credentials_verified = False
     aws_access_key_id = None
     aws_secret_access_key = None
@@ -35,6 +51,10 @@ def get_credentials():
 
 
 def select_profile():
+    """
+    sub-function under get credentials that selects the profile form ~/.aws/credentials file.
+    :return: access key and secret key
+    """
     profile_selected = False
     while not profile_selected:
         try:
@@ -60,6 +80,10 @@ def select_profile():
 
 
 def region_selection():
+    """
+        This function presents a simple region selection input. Pressing 1-5 selects the corresponding region.
+        :return: region
+        """
     dic = {"1": "us-east-1",
            "2": "us-east-2",
            "3": "us-central-1",
@@ -84,6 +108,15 @@ def region_selection():
 
 
 def create_connection_and_test(aws_access_key_id: str, aws_secret_access_key: str, _region, _bucket):
+    """
+    Creates a connection to wasabi endpoint based on selected region and checks if the access keys are valid.
+    NOTE: creating the connection is not enough to test. We need to make a method call to check for its working status.
+    :param aws_access_key_id: access key string
+    :param aws_secret_access_key: secret key string
+    :param _region: region string
+    :param _bucket: bucket name string
+    :return: reference to the connection client
+    """
     try:
         _s3_client = client('s3',
                             endpoint_url='https://s3.' + _region + '.wasabisys.com',
@@ -110,14 +143,25 @@ def create_connection_and_test(aws_access_key_id: str, aws_secret_access_key: st
 
 
 if __name__ == '__main__':
+    # Generate a table for SI units symbol table.
     size_table = {0: 'Bs', 1: 'KBs', 2: 'MBs', 3: 'GBs', 4: 'TBs', 5: 'PBs', 6: 'EBs'}
+
+    # generate access keys
     access_key_id, secret_access_key = get_credentials()
+
+    # get bucket name
     bucket = input("$ Please enter the name of the bucket: ").strip()
+
+    # get region
     region = region_selection()
+
+    # test the connection and access keys. Also checks if the bucket is valid.
     s3_client = create_connection_and_test(access_key_id, secret_access_key, region, bucket)
 
-    s3_client.list_buckets()
+    # create a paginator with default settings.
     object_response_paginator = s3_client.get_paginator('list_object_versions')
+
+    # initialize basic variables for in memory storage.
     delete_marker_count = 0
     delete_marker_size = 0
     versioned_object_count = 0
@@ -154,6 +198,7 @@ if __name__ == '__main__':
 
     delete_flag = False
     while not delete_flag:
+        print("$ " + "*" * 10)
         choice = input("$ Do you wish to delete the delete markers and non-current objects? [y/n]")
         if choice.strip().lower() == 'y':
             delete_flag = True
