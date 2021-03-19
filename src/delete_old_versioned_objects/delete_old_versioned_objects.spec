@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['delete_old_versioned_objects.py'],
-             pathex=['E:\\pytests\\Wasabi-Storage-Calculator\\src\\delete_old_versioned_objects'],
+             pathex=['/Users/voletiravi/PycharmProjects/StorageCalculator/src/delete_old_versioned_objects'],
              binaries=[],
              datas=[],
              hiddenimports=[],

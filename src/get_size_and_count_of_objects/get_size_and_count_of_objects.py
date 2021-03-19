@@ -156,6 +156,10 @@ if __name__ == '__main__':
     # Generate a table for SI units symbol table.
     size_table = {0: 'Bs', 1: 'KBs', 2: 'MBs', 3: 'GBs', 4: 'TBs', 5: 'PBs', 6: 'EBs'}
 
+    print("\n")
+    print("\n")
+    print("$ starting script...")
+
     # generate access keys
     access_key_id, secret_access_key = get_credentials()
 
@@ -194,6 +198,8 @@ if __name__ == '__main__':
                     current_object_count += 1
                     current_object_size += version['Size']
 
+    print("\n")
+    print("-" * 10)
     print("$ Total Delete markers: " + str(delete_marker_count))
     print("$ Number of Current objects: " + str(current_object_count))
     print("$ Current Objects size: ", calculate_size(current_object_size, size_table))
@@ -201,5 +207,9 @@ if __name__ == '__main__':
     print("$ Non-current Objects size: ", calculate_size(versioned_object_size, size_table))
     print("$ Total size Current + Non-current: ",
           calculate_size(versioned_object_size + current_object_size, size_table))
+    print("-" * 10)
+    print("\n")
 
     print("$ process completed successfully")
+    print("\n")
+    print("\n")

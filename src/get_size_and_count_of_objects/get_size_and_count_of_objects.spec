@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['get_size_and_count_of_objects.py'],
-             pathex=['E:\\pytests\\Wasabi-Storage-Calculator\\src\\get_size_and_count_of_objects'],
+             pathex=['/Users/voletiravi/PycharmProjects/StorageCalculator/src/get_size_and_count_of_objects'],
              binaries=[],
              datas=[],
              hiddenimports=[],
