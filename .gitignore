@@ -6,3 +6,4 @@ connectjs.js
 package-lock.json
 package.json
 build/
+.idea/
