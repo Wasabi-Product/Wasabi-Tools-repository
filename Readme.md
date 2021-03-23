@@ -2,11 +2,6 @@
 
 This repository consists of scripts written by Ravi Voleti for Wasabi Technologies, Inc. for storage calculations.
 
-automation
---
-This script automates the creation of infrastructure on the Wasabi console. Generates users and buckets that are 
-only accessible by their respective users.
-
 delete_old_versioned_objects
 --
 This Script will take the following inputs:
