@@ -91,9 +91,9 @@ def select_profile():
 
 def region_selection():
     """
-        This function presents a simple region selection input. Pressing 1-5 selects the corresponding region.
-        :return: region
-        """
+    This function presents a simple region selection input. Pressing 1-5 selects the corresponding region.
+    :return: region
+    """
     dic = {"1": "us-east-1",
            "2": "us-east-2",
            "3": "us-central-1",
