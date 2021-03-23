@@ -20,7 +20,7 @@ def calculate_size(size, _size_table):
     """
     This function dynamically calculates the right base unit symbol for size of the object.
     :param size: integer to be dynamically calculated.
-    :param _size_table: dictionary of size in Bytes. Created in main.
+    :param _size_table: dictionary of size in Bytes. Created in wasabi-automation.
     :return: string of converted size.
     """
     count = 0

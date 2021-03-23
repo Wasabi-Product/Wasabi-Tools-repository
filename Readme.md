@@ -2,7 +2,12 @@
 
 This repository consists of scripts written by Ravi Voleti for Wasabi Technologies, Inc. for storage calculations.
 
-delete_old_versioned_objects.py
+automation
+--
+This script automates the creation of infrastructure on the Wasabi console. Generates users and buckets that are 
+only accessible by their respective users.
+
+delete_old_versioned_objects
 --
 This Script will take the following inputs:
  1. profile name / Access key and Secret Key
@@ -12,7 +17,7 @@ This Script will take the following inputs:
  Calculate the size and count of the total number of delete markers, current and non-current objects. Will ask for a
  prompt to delete the delete-markers and non-current objects.
 
-get_size_and_count_of_objects.py
+get_size_and_count_of_objects
 --
 This Script will take the following inputs:
  1. profile name / Access key and Secret Key
