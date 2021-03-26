@@ -6,7 +6,8 @@ Overview
 This Script will take the following inputs:
  1. profile name / Access key and Secret Key
  2. Bucket name
- 3. region
+ 3. prefix
+ 4. region
 
  Calculate the size and count of the total number of delete markers, current and non current objects. Will ask for a
  prompt to delete the delete markers and non-current objects.
@@ -166,6 +167,9 @@ if __name__ == '__main__':
     # get bucket name
     bucket = input("$ Please enter the name of the bucket: ").strip()
 
+    # prefix
+    prefix = input("$ Please enter a prefix (leave blank if you don't need one)").strip()
+
     # get region
     region = region_selection()
 
@@ -174,6 +178,11 @@ if __name__ == '__main__':
 
     # create a paginator with default settings.
     object_response_paginator = s3_client.get_paginator('list_object_versions')
+    if len(prefix) > 0:
+        operation_parameters = {'Bucket': bucket,
+                                'Prefix': prefix}
+    else:
+        operation_parameters = {'Bucket': bucket}
 
     # initialize basic variables for in memory storage.
     delete_marker_count = 0
@@ -186,7 +195,7 @@ if __name__ == '__main__':
     version_list = []
 
     print("$ Calculating, please wait... this may take a while")
-    for object_response_itr in object_response_paginator.paginate(Bucket=bucket):
+    for object_response_itr in object_response_paginator.paginate(**operation_parameters):
         if 'DeleteMarkers' in object_response_itr:
             for delete_marker in object_response_itr['DeleteMarkers']:
                 delete_marker_list.append({'Key': delete_marker['Key'], 'VersionId': delete_marker['VersionId']})
