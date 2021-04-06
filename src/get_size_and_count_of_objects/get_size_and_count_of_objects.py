@@ -7,6 +7,7 @@ This Script will take the following inputs:
  1. profile name / Access key and Secret Key
  2. Bucket name
  3. region
+ 4. Prefix
 
  Calculate the size and count of the total number of delete markers, current and non current objects.
 """
