@@ -1,6 +1,8 @@
 get_size_and_count_of_objects.py
 --
 
+For more details go here: https://wasabi-support.zendesk.com/hc/en-us/articles/360058812051-How-to-get-total-size-of-current-non-current-objects-inside-a-bucket
+
 Prerequisites:
 
 - Install python3.
