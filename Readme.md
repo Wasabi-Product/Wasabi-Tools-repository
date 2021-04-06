@@ -1,4 +1,4 @@
-# Storage Calculator for Wasabi Technologies, Inc.
+# Support Tools  for Wasabi Technologies, Inc.
 
 This repository consists of scripts written by Ravi Voleti for Wasabi Technologies, Inc. for storage calculations.
 
