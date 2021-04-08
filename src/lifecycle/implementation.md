@@ -26,16 +26,43 @@ Ubuntu:
 
 ![ubuntu](images/linux/python-linux.png)
 
+Create a file called requirements.txt with the details below:
+
+```text
+boto3==1.17.45
+botocore==1.20.45
+jmespath==0.10.0
+python-dateutil==2.8.1
+s3transfer==0.3.6
+six==1.15.0
+urllib3==1.26.4
+```
+
+1. Open a terminal
+2. `cd` to the directory where `requirements.txt` is located.
+3. run:
+
+```shell
+pip3 install -r requirements.txt
+```
+
+![img.png](images/install-requirements.png)
+
 Execution
 --
 Set up:
-   1. script 
-   2. Cron Job
+
+1. script
+2. Cron Job
+
+Example of an automatic execution:
+
+![img.png](images/automatic-exec.png)
 
 Script
 --
 
-Edit the following variables in the script: 
+Edit the following variables in the script:
 
 ```python3
 ...
@@ -155,21 +182,21 @@ here: [Crontab quickstart reference](https://www.adminschoice.com/crontab-quick-
    ```
    * * * * * osascript -e 'tell app "Terminal" to do script "python3 <absolute path of the python script>" activate'
    ```
-   
+
    > NOTE:
-   > 
+   >
    > Remember to replace the `* * * * *` with the correct time syntax.
-   > 
+   >
    > Reason for: `osascript -e 'tell app "Terminal" to do script "python3 <absolute path of the python script>" activate`
    > Crontab runs tasks in the background without any visuals. Inorder to see an output You can use AppleScripts
    > combined with cron in order to emulate opening a Terminal and running the script from
    > within the Terminal.
-   > 
+   >
    > if you wish to not do that you can simply run:
    > ```
    >* * * * * * /usr/bin/pyton3 <absolute path of the python script>
    > ```
-   
+
    In our execution this is how it looks like:
    ```
    * * * * * osascript -e 'tell app "Terminal" to do script "python3 /Users/voletiravi/PycharmProjects/StorageCalculator/src/lifecycle/cron_test.py" activate'
@@ -183,7 +210,8 @@ here: [Crontab quickstart reference](https://www.adminschoice.com/crontab-quick-
 
    ![img.png](images/mac/execution-mac.png)
 
-5. To remove the cronjob. Type `crontab -e`, press `i` to go into `[insert mode]` remove the entry and press `escape` and
+5. To remove the cronjob. Type `crontab -e`, press `i` to go into `[insert mode]` remove the entry and press `escape`
+   and
    `:wq` to quit.
 
 <h3>Ubuntu</h3>
@@ -204,12 +232,12 @@ here: [Crontab quickstart reference](https://www.adminschoice.com/crontab-quick-
    ```
    * * * * * /usr/bin/python3 <absolute path of the python script>
    ```
-   
+
    > NOTE:
-   > 
+   >
    > Remember to replace the `* * * * *` with the correct time syntax.
    >
-   
+
    In our execution this is how it looks like:
    ```
    * * * * * /usr/bin/python3 cron_test.py
@@ -219,9 +247,9 @@ here: [Crontab quickstart reference](https://www.adminschoice.com/crontab-quick-
 
    ![img.png](images/linux/exit-linux.png)
 
-4. The script we just demonstrated will run the Cronjob every 1 minute. This particular script writes data to a text 
+4. The script we just demonstrated will run the Cronjob every 1 minute. This particular script writes data to a text
    file `t.txt`
-   
+
    ![img_1.png](images/linux/python-demonstartion.png)
 
    ![img.png](images/linux/output.png)
