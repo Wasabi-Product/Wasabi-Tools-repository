@@ -15,12 +15,15 @@ python --version
 It should look like this.
 
 Mac:
+
 ![mac](images/mac/mac-python-version.png)
 
 Windows:
+
 ![mac](images/Windows/windows-python-version.png)
 
 Ubuntu:
+
 ![ubuntu](images/linux/python-linux.png)
 
 Execution
