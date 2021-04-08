@@ -6,13 +6,13 @@ if __name__ == '__main__':
     # Editable variables
     # __
     # Use either the profile name [is AWS CLI configured?] or provide the access keys.
-    profile_name = "sahanip-beta"
+    profile_name = "root"
     aws_access_key_id = ""
     aws_secret_access_key = ""
-    delete_after_retention_days = 0  # number of days
-    bucket = "live-pankaj-bucket-for-testing-migration-13"
+    delete_after_retention_days = 1  # number of days
+    bucket = "rv-test-terraform-bucket-minio"
     prefix = ""
-    endpoint = "https://s3.wasabibeta.com"  # Endpoint of bucket
+    endpoint = "https://s3.wasabisys.com"  # Endpoint of bucket
     # __
 
     # get current date
