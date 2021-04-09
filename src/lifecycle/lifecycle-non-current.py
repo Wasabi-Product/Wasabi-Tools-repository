@@ -6,7 +6,6 @@ if __name__ == '__main__':
     # Editable variables
     # __
     # Use either the profile name [is AWS CLI configured?] or provide the access keys.
-    profile_name = "sahanip-beta"
     aws_access_key_id = ""
     aws_secret_access_key = ""
     delete_after_retention_days = 0  # number of days
@@ -17,16 +16,6 @@ if __name__ == '__main__':
 
     # get current date
     today = datetime.now(timezone.utc)
-
-    # fetch credentials from profile
-    if len(profile_name.strip()) > 0:
-        try:
-            session = Session(profile_name=profile_name)
-            credentials = session.get_credentials()
-            aws_access_key_id = credentials.access_key
-            aws_secret_access_key = credentials.secret_key
-        except Exception as e:
-            print("$ Could not fetch profile details using provided keys")
 
     try:
         # create a connection to Wasabi
