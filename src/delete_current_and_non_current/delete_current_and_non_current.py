@@ -230,7 +230,7 @@ if __name__ == '__main__':
         if choice.strip().lower() == 'y':
             delete_flag = True
             print("$ starting deletes now...")
-            print("$ removing delete markers, current and non current1000 at a time")
+            print("$ removing delete markers, current and non current 1000 at a time")
             for i in range(0, len(delete_list), 1000):
                 response = s3_client.delete_objects(
                     Bucket=bucket,
