@@ -200,6 +200,14 @@ if __name__ == '__main__':
                 delete_marker_list.append({'Key': delete_marker['Key'], 'VersionId': delete_marker['VersionId']})
                 delete_marker_count += 1
 
+        if 'Versions' in object_response_itr:
+            for version in object_response_itr['Versions']:
+                if version['IsLatest'] is False:
+                    versioned_object_count += 1
+                    versioned_object_size += version['Size']
+                elif version['IsLatest'] is True:
+                    current_object_count += 1
+                    current_object_size += version['Size']
     print("\n")
     print("-" * 10)
     print("$ Total Delete markers: " + str(delete_marker_count))
