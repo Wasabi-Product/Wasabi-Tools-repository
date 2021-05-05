@@ -25,12 +25,12 @@ def calculate_size(size, _size_table):
 
 if __name__ == '__main__':
     # Keys for accessing billing data.
-    wasabi_access_key = ''
-    wasabi_secret_key = ''
-    gmail_sender = ''
-    receiver = ''
+    wasabi_access_key = 'NJH7XMER7C828RWZMFZT'
+    wasabi_secret_key = 'zIBa1mXRXsXCzqQCuL5cUDQl06c4QCCsafgXanWM'
+    gmail_sender = 'xelese@gmail.com'
+    receiver = 'psahani@wasabi.com'
     # If you have 2FA then please enable application passwords for separate instance login.
-    gmail_password = ''
+    gmail_password = 'aiokbhkccnsaryuy'
 
     # Generate a table for SI units symbol table.
     size_table = {0: 'Bs', 1: 'KBs', 2: 'MBs', 3: 'GBs', 4: 'TBs', 5: 'PBs', 6: 'EBs'}
@@ -78,7 +78,7 @@ if __name__ == '__main__':
         msg = EmailMessage()
         msg.set_content(body)
 
-        msg['Subject'] = 'Wasabi Billing'
+        msg['Subject'] = f'Wasabi Billing for {initial_time.date()}'
         msg['From'] = gmail_sender
         msg['To'] = receiver
 

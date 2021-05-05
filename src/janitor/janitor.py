@@ -155,7 +155,7 @@ def delete_buckets(_s3_client):
 
 
 if __name__ == '__main__':
-    session = Session(profile_name="profile-name")
+    session = Session(profile_name="root")
     credentials = session.get_credentials()
     aws_access_key_id = credentials.access_key
     aws_secret_access_key = credentials.secret_key
