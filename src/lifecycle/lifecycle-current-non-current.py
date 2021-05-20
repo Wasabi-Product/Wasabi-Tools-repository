@@ -55,7 +55,7 @@ if __name__ == '__main__':
                 elif version["IsLatest"] is False:
                     count_non_current += 1
                 if (today - version['LastModified']).days > delete_after_retention_days:
-                    delete_list.append({'Key': version['Key']})
+                    delete_list.append({'Key': version['Key'], 'VersionId': version['VersionId']})
 
     # print objects count
     print("-" * 20)

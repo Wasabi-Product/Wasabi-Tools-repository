@@ -7,7 +7,7 @@ if __name__ == '__main__':
     # __
     aws_access_key_id = ""
     aws_secret_access_key = ""
-    delete_after_retention_days = 0  # number of days
+    delete_after_retention_days = 1  # number of days
     bucket = ""
     prefix = ""
     endpoint = ""  # Endpoint of bucket
@@ -56,7 +56,7 @@ if __name__ == '__main__':
                     count_non_current += 1
                 if version["IsLatest"] is False and (
                         today - version['LastModified']).days > delete_after_retention_days:
-                    delete_list.append({'Key': version['Key']})
+                    delete_list.append({'Key': version['Key'], 'VersionId': version['VersionId']})
 
     # print objects count
     print("-" * 20)
