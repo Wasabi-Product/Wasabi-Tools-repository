@@ -48,6 +48,10 @@ if __name__ == '__main__':
 
     print("$ Paginating bucket " + bucket)
     for object_response_itr in object_response_paginator.paginate(**operation_parameters):
+        if 'DeleteMarkers' in object_response_itr:
+            for delete_marker in object_response_itr['DeleteMarkers']:
+                if (today - delete_marker['LastModified']).days > delete_after_retention_days:
+                    delete_list.append({'Key': delete_marker['Key'], 'VersionId': delete_marker['VersionId']})
         if 'Versions' in object_response_itr:
             for version in object_response_itr['Versions']:
                 if version["IsLatest"] is True:
