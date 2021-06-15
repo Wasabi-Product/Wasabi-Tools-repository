@@ -95,26 +95,13 @@ def region_selection():
     This function presents a simple region selection input. Pressing 1-5 selects the corresponding region.
     :return: region
     """
-    dic = {"1": "us-east-1",
-           "2": "us-east-2",
-           "3": "us-central-1",
-           "4": "eu-central-1",
-           "5": "us-west-1"
-           }
     region_selected = False
     _region = ""
     while not region_selected:
-        ch = input("$ Select region of the bucket:\n"
-                   "$ 1: us-east-1\n"
-                   "$ 2: us-east-2\n"
-                   "$ 3: us-central-1\n"
-                   "$ 4: eu-central-1\n"
-                   "$ 5: us-west-1\n")
-        if str(ch) in dic:
-            _region = dic[str(ch)]
+        _choice = input("$ Please enter the endpoint for the bucket: ").strip().lower()
+        if len(_choice) > 0:
+            _region = _choice
             region_selected = True
-        else:
-            print("$ Invalid selection please try again")
     return _region
 
 
@@ -130,7 +117,7 @@ def create_connection_and_test(aws_access_key_id: str, aws_secret_access_key: st
     """
     try:
         _s3_client = client('s3',
-                            endpoint_url='https://s3.' + _region + '.wasabisys.com',
+                            endpoint_url=_region,
                             aws_access_key_id=aws_access_key_id,
                             aws_secret_access_key=aws_secret_access_key)
 
