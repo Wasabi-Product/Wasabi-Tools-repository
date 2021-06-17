@@ -1,63 +1,79 @@
 <LoginWindow>:
     name: "login"
-
     access: access
     secret: secret
     days: days
 
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'background.png'
+
     FloatLayout:
+        Image:
+            source: 'Wasabi_Logo.png'
+            pos_hint: {"x":0.01, "top":1.0}
+            size_hint: 0.3, 0.15
 
         Label:
             text:"Access key: "
-            font_size: (root.width**2 + root.height**2) / 13**4.5
-            pos_hint: {"x":0.05, "top":0.9}
+            font_size: '30dp'
+            pos_hint: {"x":0.05, "top":0.885}
             size_hint: 0.35, 0.15
 
         TextInput:
             id: access
-            font_size: (root.width**2 + root.height**2) / 13**4.5
+            font_size: '30dp'
             multiline: False
             write_tab: False
             hint_text: ""
-            pos_hint: {"x": 0.35 , "top":0.87}
-            size_hint: 0.58, 0.10
+            pos_hint: {"x": 0.35 , "top":0.85}
+            size_hint: 0.58, 0.08
 
         Label:
             text:"Secret Key: "
-            font_size: (root.width**2 + root.height**2) / 13**4.5
-            pos_hint: {"x":0.05, "top":0.7}
+            font_size: '30dp'
+            pos_hint: {"x":0.05, "top":0.685}
             size_hint: 0.35, 0.15
 
         TextInput:
             id: secret
-            font_size: (root.width**2 + root.height**2) / 13**4.5
+            font_size: '30dp'
             multiline: False
             password: True
             write_tab: False
             hint_text: ""
-            pos_hint: {"x": 0.35, "top":0.67}
-            size_hint: 0.58, 0.10
+            pos_hint: {"x": 0.35, "top":0.65}
+            size_hint: 0.58, 0.08
 
         Label:
             text:"Days: "
-            font_size: (root.width**2 + root.height**2) / 13**4.5
-            pos_hint: {"x":0.05, "top":0.5}
+            font_size: '30dp'
+            pos_hint: {"x":0.05, "top":0.485}
             size_hint: 0.35, 0.15
 
         TextInput:
             id: days
-            font_size: (root.width**2 + root.height**2) / 13**4.5
+            font_size: '30dp'
             multiline: False
             write_tab: False
-            hint_text: "30"
-            pos_hint: {"x": 0.35, "top":0.47}
-            size_hint: 0.58, 0.10
+            pos_hint: {"x": 0.35, "top":0.45}
+            size_hint: 0.58, 0.08
 
         Button:
-            pos_hint:{"x":0.2,"y":0.05}
-            size_hint: 0.6, 0.2
-            font_size: (root.width**2 + root.height**2) / 13**4.3
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+
+            pos_hint:{"x":0.35,"y":0.15}
+            size_hint: 0.3, 0.10
+            hint_text: "30"
             text: "Compute Egress"
+            font_size: '30dp'
 
             on_release:
                 root.manager.transition.direction = "left"
@@ -67,26 +83,52 @@
 <MainWindow>:
     egress: egress
     egress_value: egress_value
+    access_key: access_key
+
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'background.png'
 
     FloatLayout:
+        Image:
+            source: 'Wasabi_Logo.png'
+            pos_hint: {"x":0.01, "top":1.0}
+            size_hint: 0.3, 0.15
         Label:
+            outline_color: 0.5, 0.5, 0.5, 1
             id: egress
-            font_size: (root.width**2 + root.height**2) / 13**4.5
-            pos_hint: {"x":0.38, "top":0.9}
+            font_size: '30dp'
+            pos_hint: {"x":0.38, "top":0.7}
             size_hint: 0.3, 0.10
             text: "Egress: "
 
         Label:
-            id: egress_value
-            font_size: (root.width**2 + root.height**2) / 13**4.5
+            id: access_key
+            font_size: '30dp'
             pos_hint: {"x":0.33, "top":0.6}
             size_hint: 0.35, 0.15
             text: "Value"
 
+        Label:
+            id: egress_value
+            font_size: '50dp'
+            pos_hint: {"x":0.33, "top":0.43}
+            size_hint: 0.35, 0.15
+            text: "Value"
+
         Button:
-            font_size: (root.width**2 + root.height**2) / 13**4.5
-            pos_hint:{"x":0.2, "y": 0.1}
-            size_hint:0.6,0.2
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+            pos_hint:{"x":0.35,"y":0.15}
+            size_hint: 0.3, 0.10
+            hint_text: "30"
+            font_size: '30dp'
             text: "Go back"
             on_release:
                 app.root.current = "login"

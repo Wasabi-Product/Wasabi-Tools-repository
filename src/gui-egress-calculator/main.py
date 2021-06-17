@@ -6,6 +6,7 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.resources import resource_add_path
 from kivy.properties import ObjectProperty
+from kivy.config import Config
 
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
@@ -18,8 +19,10 @@ import datetime
 class MainWindow(Screen):
     egress = ObjectProperty(None)
     egress_value = ObjectProperty(None)
+    access_key = ObjectProperty(None)
     egress_size = ""
     egress_days = ""
+    access = ""
 
     @staticmethod
     def logOut():
@@ -28,6 +31,7 @@ class MainWindow(Screen):
     def on_enter(self, *args):
         self.egress.text = f'Egress Volume for last {self.egress_days} day(s) '
         self.egress_value.text = self.egress_size
+        self.access_key.text = "Access key: " + self.access
 
 
 class LoginWindow(Screen):
@@ -41,23 +45,23 @@ class LoginWindow(Screen):
     def loginBtn(self):
         try:
             if self.access.text.strip() == "":
-                return invalid("Access Key cannot be empty.")
+                return self.invalid("Access Key cannot be empty.")
 
             if self.secret.text.strip() == "":
-                return invalid("Secret Key cannot be empty.")
+                return self.invalid("Secret Key cannot be empty.")
 
             if self.days.text.strip() == "":
-                return invalid("Days cannot be empty.")
+                return self.invalid("Days cannot be empty.")
 
             if self.days.text.strip().isnumeric() is False:
-                return invalid("Days must be a number greater than 0.")
+                return self.invalid("Days must be a number greater than 0.")
 
             if self.access.text.strip() != self.access_key and self.secret.text.strip() != self.secret_key:
                 response = requests.get("https://billing.wasabisys.com/utilization/bucket/",
                                         headers={
                                             "Authorization": f'{self.access.text.strip()}:{self.secret.text.strip()}'})
                 if response.status_code >= 400:
-                    return invalid("Error: could not connect, please check your keys again.")
+                    return self.invalid("Error: could not connect, please check your keys again.")
                 self.billing_data = response.json()
                 self.access_key = self.access.text.strip()
                 self.secret_key = self.secret.text.strip()
@@ -65,29 +69,30 @@ class LoginWindow(Screen):
             size, days = compute.get_egress(self.billing_data, int(self.days.text))
             MainWindow.egress_size = str(size)
             MainWindow.egress_days = str(days)
+            MainWindow.access = self.access_key
 
             self.reset()
             sm.current = "main"
 
         except Exception as e:
-            invalid(str(e))
+            self.invalid(str(e))
 
     def reset(self):
         self.days.text = ""
 
-
-def invalid(text):
-    pop = Popup(title='Invalid Form data',
-                content=Label(text=text),
-                size_hint=(None, None), size=(800, 800))
-    pop.open()
+    def invalid(self, text):
+        pop = Popup(title='Invalid Form data',
+                    content=Label(text=text),
+                    size_hint=(None, None),
+                    size=(self.height/2, self.width/2))
+        pop.open()
 
 
 class WindowManager(ScreenManager):
     pass
 
 
-class MyMainApp(App):
+class Egress_Calculator(App):
     def build(self):
         return sm
 
@@ -140,6 +145,7 @@ class Compute:
 if __name__ == "__main__":
     if hasattr(sys, '_MEIPASS'):
         resource_add_path(os.path.join(sys._MEIPASS))
+    Config.set('graphics', 'resizable', False)
     Builder.load_file("my.kv")
     sm = WindowManager()
     screens = [LoginWindow(name="login"), MainWindow(name="main")]
@@ -151,4 +157,4 @@ if __name__ == "__main__":
 
     sm.current = "login"
 
-    MyMainApp().run()
+    Egress_Calculator().run()
