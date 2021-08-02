@@ -3,7 +3,6 @@
 import boto3
 
 from threading import Thread
-import os
 
 session = boto3.Session(profile_name="ravi")
 credentials = session.get_credentials()

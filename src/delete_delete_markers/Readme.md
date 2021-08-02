@@ -2,7 +2,7 @@ delete_delete_markers.py
 --
 
 For more details go here:
-* Insert Zendesk copy here
+[How do I mass delete 'Delete-Markers' inside a bucket?](https://wasabi-support.zendesk.com/hc/en-us/articles/360060003551-How-do-I-mass-delete-Delete-Markers-inside-a-bucket-)
 
 Prerequisites:
 

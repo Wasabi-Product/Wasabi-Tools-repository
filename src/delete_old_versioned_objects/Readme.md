@@ -2,7 +2,8 @@ delete_old_versioned_objects.py
 --
 
 For more details go here:
-https://wasabi-support.zendesk.com/hc/en-us/articles/360045760851-How-do-I-mass-delete-current-and-old-object-versions-inside-a-bucket-
+[How do I mass delete non-current versions inside a bucket?
+](https://wasabi-support.zendesk.com/hc/en-us/articles/360058028992-How-do-I-mass-delete-non-current-versions-inside-a-bucket-)
 
 Prerequisites:
 

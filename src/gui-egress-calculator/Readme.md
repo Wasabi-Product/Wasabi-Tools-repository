@@ -7,5 +7,5 @@ Create standalone from the python files using:
 --
 
 ```shell
-pyinstaller --clean -F --add-data="my.kv:." main.py
+pyinstaller --clean -F --add-data="my.kv;." --add-data="background.png;." main.py
 ```

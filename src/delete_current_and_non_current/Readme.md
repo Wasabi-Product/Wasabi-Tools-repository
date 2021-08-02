@@ -2,7 +2,7 @@ delete_current_and_non_current.py
 --
 
 For more details go here:
-* Insert Zendesk here.
+[How do I mass delete current and non-current object inside a bucket?](https://wasabi-support.zendesk.com/hc/en-us/articles/360045760851-How-do-I-mass-delete-current-and-non-current-object-inside-a-bucket-)
 
 Prerequisites:
 

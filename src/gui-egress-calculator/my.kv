@@ -11,10 +11,6 @@
             source: 'background.png'
 
     FloatLayout:
-        Image:
-            source: 'Wasabi_Logo.png'
-            pos_hint: {"x":0.01, "top":1.0}
-            size_hint: 0.3, 0.15
 
         Label:
             text:"Access key: "
@@ -83,7 +79,6 @@
 <MainWindow>:
     egress: egress
     egress_value: egress_value
-    access_key: access_key
 
     canvas.before:
         Rectangle:
@@ -92,10 +87,6 @@
             source: 'background.png'
 
     FloatLayout:
-        Image:
-            source: 'Wasabi_Logo.png'
-            pos_hint: {"x":0.01, "top":1.0}
-            size_hint: 0.3, 0.15
         Label:
             outline_color: 0.5, 0.5, 0.5, 1
             id: egress
@@ -103,13 +94,6 @@
             pos_hint: {"x":0.38, "top":0.7}
             size_hint: 0.3, 0.10
             text: "Egress: "
-
-        Label:
-            id: access_key
-            font_size: '30dp'
-            pos_hint: {"x":0.33, "top":0.6}
-            size_hint: 0.35, 0.15
-            text: "Value"
 
         Label:
             id: egress_value

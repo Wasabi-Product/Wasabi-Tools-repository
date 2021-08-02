@@ -1,20 +1,23 @@
-from boto3 import client, Session
+from boto3 import client
 from botocore.exceptions import ClientError
 from datetime import datetime, timezone
 
 if __name__ == '__main__':
     # Editable variables
     # __
-    aws_access_key_id = ""
-    aws_secret_access_key = ""
+    aws_access_key_id = "WKGJT5VC1U34ZE8KGRJ3"
+    aws_secret_access_key = "53WwJ9AmiT2QDO3MBSdo7npIJ9RPIeLqLjn0emKp"
     delete_after_retention_days = 1  # number of days
-    bucket = ""
+    bucket = "aa-john-test-bucket-east-2-rv"
     prefix = ""
-    endpoint = ""  # Endpoint of bucket
+    endpoint = "https://s3.us-east-2.wasabisys.com"  # Endpoint of bucket | Please replace with your bucket endpoint
     # __
 
     # get current date
     today = datetime.now(timezone.utc)
+
+    if delete_after_retention_days <= 0:
+        raise Exception("delete after retention must be greater than or equal to 1")
 
     try:
         # create a connection to Wasabi
@@ -50,7 +53,7 @@ if __name__ == '__main__':
     for object_response_itr in object_response_paginator.paginate(**operation_parameters):
         if 'DeleteMarkers' in object_response_itr:
             for delete_marker in object_response_itr['DeleteMarkers']:
-                if (today - delete_marker['LastModified']).days > delete_after_retention_days:
+                if (today - delete_marker['LastModified']).days > (delete_after_retention_days - 1):
                     delete_list.append({'Key': delete_marker['Key'], 'VersionId': delete_marker['VersionId']})
         if 'Versions' in object_response_itr:
             for version in object_response_itr['Versions']:
@@ -58,7 +61,7 @@ if __name__ == '__main__':
                     count_current += 1
                 elif version["IsLatest"] is False:
                     count_non_current += 1
-                if (today - version['LastModified']).days > delete_after_retention_days:
+                if (today - version['LastModified']).days > (delete_after_retention_days - 1):
                     delete_list.append({'Key': version['Key'], 'VersionId': version['VersionId']})
 
     # print objects count
@@ -86,7 +89,7 @@ if __name__ == '__main__':
 
     # paginate and recount
     print("$ Paginating bucket " + bucket)
-    for object_response_itr in object_response_paginator.paginate(Bucket=bucket):
+    for object_response_itr in object_response_paginator.paginate(**operation_parameters):
         if 'Versions' in object_response_itr:
             for version in object_response_itr['Versions']:
                 if version["IsLatest"] is True:

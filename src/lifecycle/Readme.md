@@ -1,7 +1,8 @@
 Lifecycle
 --
 
-Full Docs here: *Insert Zendesk here
+Full Docs here: 
+[How do I use scripts to achieve Object Lifecycle Policy with Wasabi](https://wasabi-support.zendesk.com/hc/en-us/articles/360061322811-How-do-I-use-scripts-to-achieve-Object-Lifecycle-Policy-with-Wasabi)
 
 <h3>lifecycle-current-non-current.py</h3>
 

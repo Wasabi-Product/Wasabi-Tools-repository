@@ -31,7 +31,6 @@ class MainWindow(Screen):
     def on_enter(self, *args):
         self.egress.text = f'Egress Volume for last {self.egress_days} day(s) '
         self.egress_value.text = self.egress_size
-        self.access_key.text = "Access key: " + self.access
 
 
 class LoginWindow(Screen):
@@ -69,7 +68,6 @@ class LoginWindow(Screen):
             size, days = compute.get_egress(self.billing_data, int(self.days.text))
             MainWindow.egress_size = str(size)
             MainWindow.egress_days = str(days)
-            MainWindow.access = self.access_key
 
             self.reset()
             sm.current = "main"
