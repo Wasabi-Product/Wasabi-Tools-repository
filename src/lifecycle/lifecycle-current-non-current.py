@@ -5,12 +5,12 @@ from datetime import datetime, timezone
 if __name__ == '__main__':
     # Editable variables
     # __
-    aws_access_key_id = "WKGJT5VC1U34ZE8KGRJ3"
-    aws_secret_access_key = "53WwJ9AmiT2QDO3MBSdo7npIJ9RPIeLqLjn0emKp"
+    aws_access_key_id = ""
+    aws_secret_access_key = ""
     delete_after_retention_days = 1  # number of days
-    bucket = "aa-john-test-bucket-east-2-rv"
+    bucket = ""
     prefix = ""
-    endpoint = "https://s3.us-east-2.wasabisys.com"  # Endpoint of bucket | Please replace with your bucket endpoint
+    endpoint = ""  # Endpoint of bucket | Please replace with your bucket endpoint
     # __
 
     # get current date
