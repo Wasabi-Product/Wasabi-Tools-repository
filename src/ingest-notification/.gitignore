@@ -1,10 +1,8 @@
 dummy-data
 data-ingest.ipynb
-Ingest-notifier.py
+*.py
 build
 dist
 *.spec
 *.txt
-deactivate_account.py
-delete_account.py
-reactivate_account.py
+*.csv
