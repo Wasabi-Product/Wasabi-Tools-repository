@@ -1,6 +1,6 @@
-# Support Tools  for Wasabi Technologies, Inc.
+# Support Tools  for Wasabi Technologies, LLC
 
-This repository consists of scripts written by Ravi Voleti for Wasabi Technologies, Inc. for storage calculations.
+This repository consists of scripts for Wasabi Technologies, LLC
 
 automation
 --
